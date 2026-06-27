@@ -141,11 +141,11 @@ const BlockSimulator = () => {
               {index < blocks.length - 1 && (
                 <div className="flex justify-center shrink-0">
                   <motion.div 
-                    animate={{ x: [0, 5, 0] }}
-                    transition={{ repeat: Infinity, duration: 2 }}
+                    animate={!isChainValidUpto(index + 1) ? { x: [0, -5, 5, -5, 5, 0] } : { x: [0, 5, 0] }}
+                    transition={!isChainValidUpto(index + 1) ? { duration: 0.5, repeat: Infinity, repeatType: "reverse" } : { repeat: Infinity, duration: 2 }}
                     className="rotate-90 lg:rotate-0"
                   >
-                    <Link2 className={`w-8 h-8 ${!isChainValidUpto(index + 1) ? 'text-red-500/50' : 'text-cyan-500/50'}`} />
+                    <Link2 className={`w-8 h-8 ${!isChainValidUpto(index + 1) ? 'text-red-500 drop-shadow-[0_0_8px_rgba(239,68,68,0.8)]' : 'text-cyan-500/50 drop-shadow-[0_0_5px_rgba(6,182,212,0.3)]'}`} />
                   </motion.div>
                 </div>
               )}

@@ -1,10 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { fetchCryptoPrices } from '../services/api';
 import CryptoCard from '../components/CryptoCard';
-import Loader from '../components/Loader';
 import { RefreshCw, Search, AlertCircle } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { motion } from 'framer-motion';
+
+const SkeletonCard = () => (
+  <div className="glass-card p-6 border border-slate-700/50 animate-pulse">
+    <div className="flex justify-between items-start mb-6">
+      <div className="flex items-center gap-3">
+        <div className="w-12 h-12 rounded-full bg-slate-700/50"></div>
+        <div>
+          <div className="h-5 w-24 bg-slate-700/50 rounded mb-2"></div>
+          <div className="h-3 w-16 bg-slate-700/50 rounded"></div>
+        </div>
+      </div>
+      <div className="h-6 w-16 bg-slate-700/50 rounded-full"></div>
+    </div>
+    
+    <div>
+      <div className="h-4 w-24 bg-slate-700/50 rounded mb-2"></div>
+      <div className="h-8 w-32 bg-slate-700/50 rounded"></div>
+    </div>
+    
+    <div className="mt-6 pt-4 border-t border-slate-700/50 flex justify-between items-center">
+      <div className="h-4 w-28 bg-slate-700/50 rounded"></div>
+      <div className="h-4 w-24 bg-slate-700/50 rounded"></div>
+    </div>
+  </div>
+);
 
 const LivePrices = () => {
   const [prices, setPrices] = useState([]);
@@ -133,7 +157,9 @@ const LivePrices = () => {
         )}
 
         {loading ? (
-          <Loader />
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[...Array(6)].map((_, i) => <SkeletonCard key={i} />)}
+          </div>
         ) : (
           <>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">

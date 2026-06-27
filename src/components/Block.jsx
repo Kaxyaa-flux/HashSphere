@@ -9,12 +9,21 @@ const Block = ({ block, index, updateBlock, isChainValid }) => {
   const [isMining, setIsMining] = useState(false);
   const [miningTime, setMiningTime] = useState(0);
 
+  const [miningProgress, setMiningProgress] = useState(0);
+
   // Determine if block is valid based on hash starting with "00" and chain validity
   const isValid = block.hash.startsWith('00') && (index === 0 || isChainValid);
+
+  // Shake animation for invalid block
+  const shakeAnimation = {
+    x: [0, -10, 10, -10, 10, -5, 5, 0],
+    transition: { duration: 0.5 }
+  };
 
   const mine = async () => {
     setIsMining(true);
     const startTime = performance.now();
+    setMiningProgress(0);
     
     let currentNonce = 0;
     let computedHash = '';
@@ -41,6 +50,7 @@ const Block = ({ block, index, updateBlock, isChainValid }) => {
         };
         updateBlock(index, updatedBlockData);
         setIsMining(false);
+        setMiningProgress(100);
         
         // Save to backend
         try {
@@ -53,6 +63,7 @@ const Block = ({ block, index, updateBlock, isChainValid }) => {
         currentNonce++;
         // Use setTimeout to yield to main thread every 500 hashes
         if (currentNonce % 500 === 0) {
+          setMiningProgress(prev => Math.min(prev + (100 / 20), 95)); // Fake progress up to 95%
           setTimeout(mineStep, 0);
         } else {
           mineStep();
@@ -83,12 +94,16 @@ const Block = ({ block, index, updateBlock, isChainValid }) => {
   return (
     <motion.div
       initial={{ opacity: 0, x: -20 }}
-      animate={{ opacity: 1, x: 0 }}
+      animate={!isValid && block.data !== "" ? shakeAnimation : { opacity: 1, x: 0 }}
+      whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.5, delay: index * 0.2 }}
-      className={`glass-card p-6 border-2 transition-colors duration-300 ${
-        isValid ? 'border-green-500/30' : 'border-red-500/50'
-      }`}
+      className={`glass-card p-6 border-2 transition-all duration-300 relative overflow-hidden ${
+        isValid ? 'border-green-500/30 shadow-[0_0_15px_rgba(34,197,94,0.1)]' : 'border-red-500/50 shadow-[0_0_15px_rgba(239,68,68,0.2)]'
+      } ${isMining ? 'animate-pulse border-cyan-500/50 shadow-[0_0_20px_rgba(6,182,212,0.3)]' : ''}`}
     >
+      {isMining && (
+        <div className="absolute top-0 left-0 h-1 bg-gradient-to-r from-cyan-400 to-purple-500 transition-all duration-300" style={{ width: `${miningProgress}%` }}></div>
+      )}
       <div className="flex justify-between items-center mb-6">
         <h3 className="text-2xl font-bold font-mono">Block #{block.index}</h3>
         {isValid ? (
