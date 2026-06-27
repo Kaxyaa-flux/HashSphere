@@ -43,7 +43,7 @@ const Navbar = () => {
   return (
     <nav className={`sticky top-0 z-50 transition-all duration-300 ${
       scrolled 
-        ? 'bg-slate-900/60 backdrop-blur-xl border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)]' 
+        ? 'bg-theme-surface/60 backdrop-blur-xl border-b border-soft-blue/20 shadow-[0_4px_30px_rgba(16,185,129,0.1)]' 
         : 'bg-transparent border-b border-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -53,7 +53,7 @@ const Navbar = () => {
               whileHover={{ rotate: 90 }}
               transition={{ type: 'spring', stiffness: 200, damping: 10 }}
             >
-              <Hexagon className="h-8 w-8 text-cyan-primary group-hover:text-cyan-400 transition-colors" />
+              <Hexagon className="h-8 w-8 text-soft-blue group-hover:text-purple-primary transition-colors" />
             </motion.div>
             <span className="font-bold text-xl tracking-tight">Hash<span className="gradient-text">Sphere</span></span>
           </NavLink>
@@ -67,15 +67,15 @@ const Navbar = () => {
                     to={link.path}
                     className={`relative px-4 py-2 rounded-md text-sm font-medium transition-colors ${
                       isActive
-                        ? 'text-white'
-                        : 'text-slate-300 hover:text-white'
+                        ? 'text-soft-blue drop-shadow-[0_0_8px_rgba(16,185,129,0.5)]'
+                        : 'text-theme-muted hover:text-theme-text'
                     }`}
                   >
                     {link.name}
                     {isActive && (
                       <motion.div
                         layoutId="navbar-indicator"
-                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 to-purple-500 neon-shadow rounded-full"
+                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-purple-primary rounded-full shadow-[0_0_8px_rgba(212,175,55,0.6)]"
                         transition={{ type: "spring", stiffness: 300, damping: 30 }}
                       />
                     )}
@@ -88,7 +88,7 @@ const Navbar = () => {
           <div className="hidden md:flex items-center">
             <button
               onClick={toggleDarkMode}
-              className="p-2 rounded-full hover:bg-slate-800 transition-colors text-slate-300 hover:text-white ripple-container"
+              className="p-2 rounded-full hover:bg-theme-card transition-colors text-theme-muted hover:text-theme-text ripple-container"
             >
               {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             </button>
@@ -97,13 +97,13 @@ const Navbar = () => {
           <div className="-mr-2 flex md:hidden items-center gap-2">
             <button
               onClick={toggleDarkMode}
-              className="p-2 rounded-full text-slate-400 hover:text-white"
+              className="p-2 rounded-full text-theme-muted hover:text-theme-text"
             >
               {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-white hover:bg-slate-800 focus:outline-none"
+              className="inline-flex items-center justify-center p-2 rounded-md text-theme-muted hover:text-theme-text hover:bg-theme-card focus:outline-none"
             >
               <span className="sr-only">Open main menu</span>
               {isOpen ? <X className="block h-6 w-6" /> : <Menu className="block h-6 w-6" />}
@@ -129,8 +129,8 @@ const Navbar = () => {
                   className={({ isActive }) =>
                     `block px-3 py-2 rounded-md text-base font-medium ${
                       isActive
-                        ? 'bg-slate-800 text-white'
-                        : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                        ? 'bg-theme-card text-theme-text'
+                        : 'text-theme-muted hover:bg-theme-card hover:text-theme-text'
                     }`
                   }
                 >

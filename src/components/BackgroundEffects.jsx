@@ -26,7 +26,7 @@ const BackgroundEffects = () => {
   return (
     <div className="fixed inset-0 pointer-events-none z-[-1] overflow-hidden">
       {/* Base radial gradient background */}
-      <div className="absolute inset-0 bg-slate-950"></div>
+      <div className="absolute inset-0 bg-theme-bg"></div>
       
       {/* Animated gradient orbs */}
       <motion.div 

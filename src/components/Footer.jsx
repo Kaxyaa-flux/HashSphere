@@ -36,7 +36,7 @@ const Footer = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="border-t border-slate-800 bg-slate-950/50 mt-12 py-12 relative z-10"
+      className="border-t border-slate-800 bg-theme-bg/50 mt-12 py-12 relative z-10"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-2 gap-12">
@@ -44,20 +44,20 @@ const Footer = () => {
           <div className="flex flex-col justify-between">
             <div>
               <p className="text-2xl font-bold">Hash<span className="gradient-text">Sphere</span></p>
-              <p className="text-base text-slate-400 mt-2 max-w-md">Explore the World of Blockchain, One Hash at a Time. Learn, interact, and discover the future of Web3.</p>
+              <p className="text-base text-theme-muted mt-2 max-w-md">Explore the World of Blockchain, One Hash at a Time. Learn, interact, and discover the future of Web3.</p>
             </div>
             
-            <div className="mt-8 flex flex-col gap-2 text-sm text-slate-400">
+            <div className="mt-8 flex flex-col gap-2 text-sm text-theme-muted">
               <p className="flex items-center gap-1">
-                Developed with <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 1.5, repeat: Infinity }}><Heart className="w-4 h-4 text-purple-500 fill-purple-500" /></motion.div> by <span className="text-white font-medium">Developer</span>
+                Developed with <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 1.5, repeat: Infinity }}><Heart className="w-4 h-4 text-purple-500 fill-purple-500" /></motion.div> by <span className="text-theme-text font-medium">Developer</span>
               </p>
-              <p>Batch: <span className="text-white font-medium">Web3 Innovators</span></p>
+              <p>Batch: <span className="text-theme-text font-medium">Web3 Innovators</span></p>
               <motion.a 
                 href="https://github.com/Kaxyaa-flux/HashSphere" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05, textShadow: "0px 0px 8px rgb(255,255,255)" }}
-                className="flex items-center gap-1 hover:text-white transition-all mt-2 w-max"
+                className="flex items-center gap-1 hover:text-theme-text transition-all mt-2 w-max"
               >
                 <Code2 className="w-5 h-5" /> GitHub Repository
               </motion.a>
@@ -73,14 +73,14 @@ const Footer = () => {
                   placeholder="Name" 
                   value={formData.name}
                   onChange={(e) => setFormData({...formData, name: e.target.value})}
-                  className="w-full bg-slate-900/50 border border-slate-700/50 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-cyan-500/50"
+                  className="w-full bg-theme-surface/50 border border-slate-700/50 rounded-lg p-3 text-sm text-theme-text focus:outline-none focus:border-cyan-500/50"
                 />
                 <input 
                   type="email" 
                   placeholder="Email" 
                   value={formData.email}
                   onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  className="w-full bg-slate-900/50 border border-slate-700/50 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-cyan-500/50"
+                  className="w-full bg-theme-surface/50 border border-slate-700/50 rounded-lg p-3 text-sm text-theme-text focus:outline-none focus:border-cyan-500/50"
                 />
               </div>
               <textarea 
@@ -88,14 +88,14 @@ const Footer = () => {
                 rows="3"
                 value={formData.message}
                 onChange={(e) => setFormData({...formData, message: e.target.value})}
-                className="w-full bg-slate-900/50 border border-slate-700/50 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-cyan-500/50 resize-none"
+                className="w-full bg-theme-surface/50 border border-slate-700/50 rounded-lg p-3 text-sm text-theme-text focus:outline-none focus:border-cyan-500/50 resize-none"
               ></textarea>
               <button 
                 type="submit" 
                 disabled={isSubmitting || isSubmitted}
                 className={`w-full py-2.5 rounded-lg font-medium flex items-center justify-center gap-2 transition-all ${
                   isSubmitted ? 'bg-green-600/20 text-green-500 border border-green-500/30' : 
-                  'gradient-bg text-white hover:opacity-90'
+                  'gradient-bg text-theme-text hover:opacity-90'
                 }`}
               >
                 {isSubmitting ? 'Sending...' : 
