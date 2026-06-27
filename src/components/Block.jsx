@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { calculateHash } from '../utils/blockchain';
 import { motion } from 'framer-motion';
-import { Cpu, AlertTriangle, CheckCircle2 } from 'lucide-react';
+import { Cpu, AlertTriangle, CheckCircle2, Wallet, MessageSquare, DollarSign } from 'lucide-react';
 import { saveMinedBlock } from '../services/api';
 import toast from 'react-hot-toast';
 
-const Block = ({ block, index, updateBlock, isChainValid }) => {
+const Block = ({ block, index, updateBlock, isChainValid, difficulty = '00' }) => {
   const [isMining, setIsMining] = useState(false);
   const [miningTime, setMiningTime] = useState(0);
 
   const [miningProgress, setMiningProgress] = useState(0);
 
-  // Determine if block is valid based on hash starting with "00" and chain validity
-  const isValid = block.hash.startsWith('00') && (index === 0 || isChainValid);
+  // Determine if block is valid based on hash starting with current difficulty and chain validity
+  const isValid = block.hash.startsWith(difficulty) && (index === 0 || isChainValid);
 
   // Shake animation for invalid block
   const shakeAnimation = {
@@ -39,7 +39,7 @@ const Block = ({ block, index, updateBlock, isChainValid }) => {
         currentNonce
       );
       
-      if (computedHash.startsWith('00')) {
+      if (computedHash.startsWith(difficulty)) {
         const endTime = performance.now();
         setMiningTime(((endTime - startTime) / 1000).toFixed(2));
         
@@ -74,22 +74,38 @@ const Block = ({ block, index, updateBlock, isChainValid }) => {
     mineStep();
   };
 
-  const handleDataChange = async (e) => {
-    const newData = e.target.value;
+  const handleTxChange = async (field, value) => {
+    const newTx = { ...txData, [field]: value };
+    const newDataStr = JSON.stringify(newTx);
+    
     const newHash = await calculateHash(
       block.index,
       block.previousHash,
       block.timestamp,
-      newData,
+      newDataStr,
       block.nonce
     );
     
     updateBlock(index, {
       ...block,
-      data: newData,
+      data: newDataStr,
       hash: newHash
     });
   };
+
+  let txData = { sender: '', receiver: '', amount: '', currency: 'ETH', message: '' };
+  try {
+    const parsed = JSON.parse(block.data);
+    if (typeof parsed === 'object' && parsed !== null) {
+      txData = { ...txData, ...parsed };
+    } else {
+      txData.message = block.data;
+    }
+  } catch (e) {
+    txData.message = block.data;
+  }
+
+  const isFormValid = txData.sender.trim() !== '' && txData.receiver.trim() !== '' && txData.amount !== '';
 
   return (
     <motion.div
@@ -118,54 +134,117 @@ const Block = ({ block, index, updateBlock, isChainValid }) => {
       </div>
 
       <div className="space-y-4">
-        <div>
-          <label className="block text-sm text-slate-400 mb-1">Data</label>
-          <textarea
-            value={block.data}
-            onChange={handleDataChange}
-            className="w-full bg-slate-900/50 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500/50 font-mono resize-none h-24"
-            placeholder="Enter block data..."
-          />
+        <div className="space-y-3 bg-theme-surface/30 p-4 rounded-xl border border-theme-border">
+          <h4 className="text-sm font-bold text-soft-blue flex items-center gap-2 mb-2">
+            Transaction Details
+          </h4>
+          
+          <div>
+            <label className="text-xs text-theme-muted mb-1 flex items-center gap-1">
+              <Wallet className="w-3 h-3" /> Sender Wallet Address
+            </label>
+            <input
+              type="text"
+              value={txData.sender}
+              onChange={(e) => handleTxChange('sender', e.target.value)}
+              placeholder="0xA1B2...C3D4"
+              className="w-full bg-theme-surface/50 border border-theme-border rounded-lg p-2 text-sm text-theme-text focus:outline-none focus:ring-1 focus:ring-soft-blue font-mono"
+            />
+          </div>
+
+          <div>
+            <label className="text-xs text-theme-muted mb-1 flex items-center gap-1">
+              <Wallet className="w-3 h-3" /> Receiver Wallet Address
+            </label>
+            <input
+              type="text"
+              value={txData.receiver}
+              onChange={(e) => handleTxChange('receiver', e.target.value)}
+              placeholder="0x9F8E...1A2B"
+              className="w-full bg-theme-surface/50 border border-theme-border rounded-lg p-2 text-sm text-theme-text focus:outline-none focus:ring-1 focus:ring-soft-blue font-mono"
+            />
+          </div>
+
+          <div className="flex gap-3">
+            <div className="flex-1">
+              <label className="text-xs text-theme-muted mb-1 flex items-center gap-1">
+                <DollarSign className="w-3 h-3" /> Amount
+              </label>
+              <input
+                type="number"
+                value={txData.amount}
+                onChange={(e) => handleTxChange('amount', e.target.value)}
+                placeholder="0.00"
+                className="w-full bg-theme-surface/50 border border-theme-border rounded-lg p-2 text-sm text-theme-text focus:outline-none focus:ring-1 focus:ring-soft-blue font-mono"
+              />
+            </div>
+            <div className="w-24">
+              <label className="text-xs text-theme-muted mb-1">Asset</label>
+              <select
+                value={txData.currency}
+                onChange={(e) => handleTxChange('currency', e.target.value)}
+                className="w-full bg-theme-surface/50 border border-theme-border rounded-lg p-2 text-sm text-theme-text focus:outline-none focus:ring-1 focus:ring-soft-blue font-bold"
+              >
+                <option value="ETH">ETH</option>
+                <option value="BTC">BTC</option>
+                <option value="SOL">SOL</option>
+                <option value="ARB">ARB</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label className="text-xs text-theme-muted mb-1 flex items-center gap-1">
+              <MessageSquare className="w-3 h-3" /> Optional Message
+            </label>
+            <textarea
+              value={txData.message}
+              onChange={(e) => handleTxChange('message', e.target.value)}
+              maxLength={200}
+              placeholder="Payment for NFT..."
+              className="w-full bg-theme-surface/50 border border-theme-border rounded-lg p-2 text-sm text-theme-text focus:outline-none focus:ring-1 focus:ring-soft-blue resize-none h-16"
+            />
+          </div>
         </div>
 
         <div>
-          <label className="block text-sm text-slate-400 mb-1">Previous Hash</label>
+          <label className="block text-sm text-theme-muted mb-1">Previous Hash</label>
           <input
             type="text"
             value={block.previousHash}
             readOnly
-            className="w-full bg-slate-900/80 border border-slate-700 rounded-lg p-3 text-slate-400 font-mono text-xs overflow-hidden text-ellipsis"
+            className="w-full bg-theme-surface/80 border border-slate-700 rounded-lg p-3 text-theme-muted font-mono text-xs overflow-hidden text-ellipsis"
           />
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm text-slate-400 mb-1">Nonce</label>
+            <label className="block text-sm text-theme-muted mb-1">Nonce</label>
             <input
               type="text"
               value={block.nonce}
               readOnly
-              className="w-full bg-slate-900/80 border border-slate-700 rounded-lg p-3 text-slate-300 font-mono"
+              className="w-full bg-theme-surface/80 border border-slate-700 rounded-lg p-3 text-theme-muted font-mono"
             />
           </div>
           <div>
-            <label className="block text-sm text-slate-400 mb-1">Mining Time</label>
+            <label className="block text-sm text-theme-muted mb-1">Mining Time</label>
             <input
               type="text"
               value={miningTime > 0 ? `${miningTime}s` : '-'}
               readOnly
-              className="w-full bg-slate-900/80 border border-slate-700 rounded-lg p-3 text-slate-300 font-mono"
+              className="w-full bg-theme-surface/80 border border-slate-700 rounded-lg p-3 text-theme-muted font-mono"
             />
           </div>
         </div>
 
         <div>
-          <label className="block text-sm text-slate-400 mb-1">Hash</label>
+          <label className="block text-sm text-theme-muted mb-1">Hash</label>
           <input
             type="text"
             value={block.hash}
             readOnly
-            className={`w-full bg-slate-900/80 border rounded-lg p-3 font-mono text-xs transition-colors duration-300 ${
+            className={`w-full bg-theme-surface/80 border rounded-lg p-3 font-mono text-xs transition-colors duration-300 ${
               isValid ? 'text-green-400 border-green-500/30' : 'text-red-400 border-red-500/50'
             }`}
           />
@@ -173,13 +252,13 @@ const Block = ({ block, index, updateBlock, isChainValid }) => {
 
         <button
           onClick={mine}
-          disabled={isMining || isValid}
+          disabled={isMining || isValid || !isFormValid}
           className={`w-full py-3 rounded-xl font-bold flex items-center justify-center gap-2 transition-all ${
-            isMining 
-              ? 'bg-slate-700 text-slate-400 cursor-not-allowed' 
+            isMining || !isFormValid
+              ? 'bg-theme-surface border border-theme-border text-theme-muted cursor-not-allowed opacity-70' 
               : isValid 
                 ? 'bg-green-600/20 text-green-500 cursor-not-allowed border border-green-500/30'
-                : 'gradient-bg text-white hover:shadow-[0_0_15px_rgba(6,182,212,0.4)]'
+                : 'gradient-bg text-theme-text hover:shadow-[0_0_15px_rgba(16,185,129,0.4)]'
           }`}
         >
           {isMining ? (
