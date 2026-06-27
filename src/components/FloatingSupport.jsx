@@ -17,18 +17,18 @@ const FloatingSupport = () => {
           >
             <div className="flex justify-between items-center border-b border-slate-700/50 pb-2 mb-3">
               <h4 className="font-bold font-space">HashSphere Support</h4>
-              <button onClick={() => setIsOpen(false)} className="text-slate-400 hover:text-white transition-colors">
+              <button onClick={() => setIsOpen(false)} className="text-theme-muted hover:text-theme-text transition-colors">
                 <X className="w-5 h-5" />
               </button>
             </div>
-            <p className="text-sm text-slate-300 mb-4">Hello! How can we help you explore the blockchain today?</p>
+            <p className="text-sm text-theme-muted mb-4">Hello! How can we help you explore the blockchain today?</p>
             <div className="flex gap-2">
               <input 
                 type="text" 
                 placeholder="Type your question..." 
-                className="w-full bg-slate-900/50 border border-slate-700/50 rounded-lg p-2 text-sm text-white focus:outline-none focus:border-cyan-500/50"
+                className="w-full bg-theme-surface/50 border border-slate-700/50 rounded-lg p-2 text-sm text-theme-text focus:outline-none focus:border-cyan-500/50"
               />
-              <button className="gradient-bg px-3 rounded-lg text-white font-medium hover:opacity-90">
+              <button className="gradient-bg px-3 rounded-lg text-theme-text font-medium hover:opacity-90">
                 Send
               </button>
             </div>
@@ -40,7 +40,7 @@ const FloatingSupport = () => {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="w-14 h-14 rounded-full gradient-bg flex items-center justify-center text-white shadow-[0_0_20px_rgba(37,99,235,0.4)]"
+        className="w-14 h-14 rounded-full gradient-bg flex items-center justify-center text-theme-text shadow-[0_0_20px_rgba(37,99,235,0.4)]"
       >
         {isOpen ? <X className="w-6 h-6" /> : <MessageSquare className="w-6 h-6" />}
       </motion.button>

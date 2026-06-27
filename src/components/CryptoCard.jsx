@@ -37,13 +37,13 @@ const CryptoCard = ({ coin, index }) => {
       
       <div className="flex justify-between items-start mb-6">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-full bg-slate-800/80 flex items-center justify-center p-2 border border-slate-700">
+          <div className="w-12 h-12 rounded-full bg-theme-card/80 flex items-center justify-center p-2 border border-slate-700">
              {/* Using simple placeholder letters for logos as we don't have images */}
-             <span className="text-xl font-bold text-slate-300">{coin?.name?.charAt(0) || '?'}</span>
+             <span className="text-xl font-bold text-theme-muted">{coin?.name?.charAt(0) || '?'}</span>
           </div>
           <div>
             <h3 className="text-xl font-bold">{coin?.name || 'Unknown'}</h3>
-            <p className="text-sm text-slate-400 uppercase">{coin?.id || '---'}</p>
+            <p className="text-sm text-theme-muted uppercase">{coin?.id || '---'}</p>
           </div>
         </div>
         <div className={`flex items-center gap-1 text-sm font-medium px-2 py-1 rounded-full ${isPositive ? 'bg-green-500/10 text-green-400' : 'bg-red-500/10 text-red-400'}`}>
@@ -53,7 +53,7 @@ const CryptoCard = ({ coin, index }) => {
       </div>
       
       <div>
-        <p className="text-slate-400 text-sm mb-1">Current Price</p>
+        <p className="text-theme-muted text-sm mb-1">Current Price</p>
         <div className="flex items-baseline gap-2">
           <span className="text-3xl font-bold">
             <AnimatedCounter value={coin?.usd || 0} prefix="$" decimal={(coin?.usd || 0) < 1 ? 6 : 2} />
@@ -61,7 +61,7 @@ const CryptoCard = ({ coin, index }) => {
         </div>
       </div>
       
-      <div className="mt-6 pt-4 border-t border-slate-700/50 flex justify-between items-center text-sm text-slate-400">
+      <div className="mt-6 pt-4 border-t border-slate-700/50 flex justify-between items-center text-sm text-theme-muted">
         <span className="flex items-center gap-1"><Activity className="w-4 h-4" /> 24h Volatility</span>
         <span>{isPositive ? 'Bullish' : 'Bearish'} Trend</span>
       </div>

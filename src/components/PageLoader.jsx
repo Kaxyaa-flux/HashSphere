@@ -19,7 +19,7 @@ const PageLoader = ({ onComplete }) => {
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: 0.8, ease: "easeInOut" } }}
-          className="fixed inset-0 z-[9999] bg-slate-950 flex flex-col items-center justify-center overflow-hidden"
+          className="fixed inset-0 z-[9999] bg-theme-bg flex flex-col items-center justify-center overflow-hidden"
         >
           <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
           
@@ -45,7 +45,7 @@ const PageLoader = ({ onComplete }) => {
                 animate={{ scale: [1, 1.1, 1] }}
                 transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
               >
-                <span className="text-white font-mono font-bold text-2xl">H</span>
+                <span className="text-theme-text font-mono font-bold text-2xl">H</span>
               </motion.div>
             </div>
             
