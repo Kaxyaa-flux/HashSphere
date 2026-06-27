@@ -21,7 +21,8 @@ const Concepts = () => {
         "Users own their data and assets",
         "Uses crypto wallets for identity and login",
         "Censorship-resistant and distributed"
-      ]
+      ],
+      learnMoreText: "Web3 represents a fundamental paradigm shift towards a decentralized internet. By removing intermediaries, it empowers users with true digital ownership, privacy, and permissionless innovation."
     },
     {
       title: "Data Storage",
@@ -39,7 +40,8 @@ const Concepts = () => {
         "Append-only (records cannot be modified or deleted)",
         "Slower due to consensus mechanisms",
         "Trustless architecture relying on cryptography"
-      ]
+      ],
+      learnMoreText: "While traditional databases are optimized for speed and efficiency, blockchains prioritize security and trustlessness. The append-only nature ensures a tamper-proof historical record."
     },
     {
       title: "Cryptography",
@@ -57,7 +59,8 @@ const Concepts = () => {
         "MUST NEVER be shared with anyone",
         "Used to authorize transactions or decrypt messages",
         "Losing it means losing access to your assets permanently"
-      ]
+      ],
+      learnMoreText: "Asymmetric cryptography (Public/Private key pairs) is the mathematical foundation of Web3. It ensures that only the true owner of a private key can spend funds associated with their public address."
     },
     {
       title: "Top Cryptocurrencies",
@@ -75,7 +78,8 @@ const Concepts = () => {
         "World computer for decentralized applications (dApps)",
         "Turing complete smart contracts",
         "Proof of Stake consensus (energy efficient)"
-      ]
+      ],
+      learnMoreText: "Bitcoin introduced the concept of digital scarcity and decentralized money. Ethereum took it a step further by introducing programmable smart contracts, enabling decentralized finance (DeFi) and NFTs."
     }
   ];
 
@@ -111,6 +115,7 @@ const Concepts = () => {
               rightTitle={comp.rightTitle}
               rightItems={comp.rightItems}
               delay={idx * 0.1}
+              learnMoreText={comp.learnMoreText}
             />
           ))}
         </div>

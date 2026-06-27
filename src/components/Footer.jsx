@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Code2, Heart, Send, CheckCircle2 } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { submitFeedback } from '../services/api';
 import toast from 'react-hot-toast';
 
@@ -30,7 +31,13 @@ const Footer = () => {
   };
 
   return (
-    <footer className="border-t border-slate-800 bg-slate-950/50 mt-12 py-12">
+    <motion.footer 
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="border-t border-slate-800 bg-slate-950/50 mt-12 py-12 relative z-10"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-2 gap-12">
           
@@ -42,17 +49,18 @@ const Footer = () => {
             
             <div className="mt-8 flex flex-col gap-2 text-sm text-slate-400">
               <p className="flex items-center gap-1">
-                Developed with <Heart className="w-4 h-4 text-purple-500 fill-purple-500" /> by <span className="text-white font-medium">Developer</span>
+                Developed with <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 1.5, repeat: Infinity }}><Heart className="w-4 h-4 text-purple-500 fill-purple-500" /></motion.div> by <span className="text-white font-medium">Developer</span>
               </p>
               <p>Batch: <span className="text-white font-medium">Web3 Innovators</span></p>
-              <a 
+              <motion.a 
                 href="https://github.com/Kaxyaa-flux/HashSphere" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="flex items-center gap-1 hover:text-white transition-colors mt-2"
+                whileHover={{ scale: 1.05, textShadow: "0px 0px 8px rgb(255,255,255)" }}
+                className="flex items-center gap-1 hover:text-white transition-all mt-2 w-max"
               >
                 <Code2 className="w-5 h-5" /> GitHub Repository
-              </a>
+              </motion.a>
             </div>
           </div>
           
@@ -99,7 +107,7 @@ const Footer = () => {
 
         </div>
       </div>
-    </footer>
+    </motion.footer>
   );
 };
 

@@ -1,8 +1,9 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, BookOpen, Layers, Coins, Cpu, ShieldCheck, Zap, Lock, Globe } from 'lucide-react';
+import { ArrowRight, BookOpen, Layers, Coins, Cpu, ShieldCheck, Zap, Lock, Globe, Activity, Blocks, Network } from 'lucide-react';
 import FeatureCard from '../components/FeatureCard';
+import AnimatedCounter from '../components/AnimatedCounter';
 
 const Home = () => {
   const features = [
@@ -35,6 +36,9 @@ const Home = () => {
     { icon: Zap, title: "Trustless Systems", desc: "No need for centralized authorities or middlemen." }
   ];
 
+  const titleText = "Explore the Future of ";
+  const titleLetters = Array.from(titleText);
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -56,12 +60,37 @@ const Home = () => {
             </motion.div>
             
             <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: { opacity: 1 },
+                visible: {
+                  opacity: 1,
+                  transition: { staggerChildren: 0.05, delayChildren: 0.2 }
+                }
+              }}
               className="text-5xl md:text-7xl font-extrabold tracking-tight mb-8"
             >
-              Explore the Future of <span className="gradient-text">Blockchain</span>
+              {titleLetters.map((char, index) => (
+                <motion.span
+                  key={index}
+                  variants={{
+                    hidden: { opacity: 0, y: 50 },
+                    visible: { opacity: 1, y: 0, transition: { type: "spring", damping: 12, stiffness: 200 } }
+                  }}
+                  style={{ display: "inline-block" }}
+                >
+                  {char === " " ? "\u00A0" : char}
+                </motion.span>
+              ))}
+              <motion.span 
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 1.2, type: "spring" }}
+                className="gradient-text inline-block"
+              >
+                Blockchain
+              </motion.span>
             </motion.h1>
             
             <motion.p 
@@ -79,10 +108,13 @@ const Home = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="flex flex-col sm:flex-row items-center justify-center gap-4"
             >
-              <Link to="/simulator" className="w-full sm:w-auto px-8 py-4 rounded-xl gradient-bg text-white font-bold hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] transition-all flex items-center justify-center gap-2">
-                Start Learning <ArrowRight className="w-5 h-5" />
+              <Link to="/simulator" className="relative group w-full sm:w-auto">
+                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-xl blur opacity-30 group-hover:opacity-100 transition duration-300 animate-pulse-glow"></div>
+                <div className="relative w-full px-8 py-4 bg-slate-900 rounded-xl text-white font-bold hover:bg-slate-800 transition-all flex items-center justify-center gap-2 border border-slate-700">
+                  Start Learning <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </div>
               </Link>
-              <Link to="/concepts" className="w-full sm:w-auto px-8 py-4 rounded-xl glass-panel text-white font-bold hover:bg-slate-800/80 transition-all">
+              <Link to="/concepts" className="w-full sm:w-auto px-8 py-4 rounded-xl glass-panel text-white font-bold hover:bg-slate-800/80 transition-all border border-slate-700/50 hover:border-cyan-500/50">
                 Explore Concepts
               </Link>
             </motion.div>
@@ -110,18 +142,24 @@ const Home = () => {
                   </p>
                 </div>
               </div>
-              <div className="flex justify-center">
+              <div className="flex justify-center relative">
                 <motion.div 
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                  className="w-64 h-64 border-4 border-dashed border-cyan-500/30 rounded-full flex items-center justify-center"
+                  animate={{ y: [-15, 15] }}
+                  transition={{ duration: 4, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+                  className="relative"
                 >
                   <motion.div 
-                    animate={{ rotate: -360 }}
-                    transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                    className="w-48 h-48 border-4 border-dotted border-purple-500/40 rounded-full flex items-center justify-center"
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                    className="w-64 h-64 border-4 border-dashed border-cyan-500/30 rounded-full flex items-center justify-center"
                   >
-                     <div className="w-24 h-24 gradient-bg rounded-full blur-xl opacity-50"></div>
+                    <motion.div 
+                      animate={{ rotate: -360 }}
+                      transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                      className="w-48 h-48 border-4 border-dotted border-purple-500/40 rounded-full flex items-center justify-center"
+                    >
+                       <div className="w-24 h-24 gradient-bg rounded-full blur-xl opacity-50 animate-pulse"></div>
+                    </motion.div>
                   </motion.div>
                 </motion.div>
               </div>
@@ -175,6 +213,28 @@ const Home = () => {
                 <p className="text-slate-400 text-sm">{benefit.desc}</p>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+      {/* Stats Section */}
+      <section className="py-12 border-y border-slate-800 bg-slate-900/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="p-4">
+              <Activity className="w-8 h-8 text-cyan-400 mx-auto mb-3" />
+              <div className="text-4xl font-bold text-white mb-1"><AnimatedCounter value={25.4} decimal={1} suffix="M+" /></div>
+              <div className="text-sm text-slate-400">Daily Transactions</div>
+            </motion.div>
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="p-4">
+              <Blocks className="w-8 h-8 text-purple-400 mx-auto mb-3" />
+              <div className="text-4xl font-bold text-white mb-1"><AnimatedCounter value={892} suffix="K+" /></div>
+              <div className="text-sm text-slate-400">Blocks Mined</div>
+            </motion.div>
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="p-4">
+              <Network className="w-8 h-8 text-blue-400 mx-auto mb-3" />
+              <div className="text-4xl font-bold text-white mb-1"><AnimatedCounter value={120} suffix="+" /></div>
+              <div className="text-sm text-slate-400">Networks Supported</div>
+            </motion.div>
           </div>
         </div>
       </section>
