@@ -2,9 +2,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
 @theme {
-  --color-soft-blue: #2563EB;
-  --color-cyan-primary: #06b6d4;
-  --color-purple-primary: #8B5CF6;
+  --color-soft-blue: #10B981;
+  --color-cyan-primary: #34D399;
+  --color-purple-primary: #D4AF37;
+  
+  --color-theme-bg: var(--color-theme-bg);
+  --color-theme-surface: var(--color-theme-surface);
+  --color-theme-card: var(--color-theme-card);
+  --color-theme-success: #22C55E;
+  --color-theme-danger: #EF4444;
+  --color-theme-text: var(--color-theme-text);
+  --color-theme-muted: var(--color-theme-muted);
+
   --font-inter: 'Inter', sans-serif;
   --font-mono: 'Fira Code', monospace;
   --font-space: 'Space Grotesk', sans-serif;
@@ -53,16 +62,34 @@
   }
 }
 
+:root {
+  --color-theme-bg: #0B0F0C;
+  --color-theme-surface: #141A16;
+  --color-theme-card: rgba(29, 36, 32, 0.7);
+  --color-theme-text: #F8FAFC;
+  --color-theme-muted: #A1A1AA;
+  --color-theme-border: rgba(255, 255, 255, 0.08);
+}
+
+html.light {
+  --color-theme-bg: #F8FAFC;
+  --color-theme-surface: #F1F5F9;
+  --color-theme-card: #FFFFFF;
+  --color-theme-text: #0F172A;
+  --color-theme-muted: #475569;
+  --color-theme-border: rgba(0, 0, 0, 0.1);
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-slate-950 text-slate-100 font-inter antialiased min-h-screen selection:bg-cyan-500/30 overflow-x-hidden transition-colors duration-500;
+    @apply bg-theme-bg text-theme-text font-inter antialiased min-h-screen selection:bg-cyan-500/30 overflow-x-hidden transition-colors duration-500;
   }
   
   html.light body {
-    @apply bg-slate-50 text-slate-900;
+    @apply bg-theme-bg text-theme-text;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -75,7 +102,7 @@
     height: 8px;
   }
   ::-webkit-scrollbar-track {
-    background: #020617;
+    background: var(--color-theme-bg);
   }
   ::-webkit-scrollbar-thumb {
     background: #334155;
@@ -97,20 +124,29 @@
 
 @layer utilities {
   .glass-card {
-    @apply bg-slate-900/40 backdrop-blur-xl border border-white/10 rounded-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.36)] transition-all duration-300;
+    @apply rounded-[20px] transition-all duration-300;
+    background-color: var(--color-theme-card);
+    backdrop-filter: blur(18px);
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--color-theme-border);
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15);
   }
   html.light .glass-card {
-    @apply bg-white/60 border-slate-200/50 shadow-[0_8px_32px_0_rgba(0,0,0,0.05)];
+    @apply shadow-[0_8px_32px_0_rgba(0,0,0,0.05)];
   }
   .glass-card:hover {
     @apply border-white/20 shadow-[0_8px_32px_0_rgba(6,182,212,0.15)] -translate-y-1;
   }
   
   .glass-panel {
-    @apply bg-slate-800/30 backdrop-blur-lg border border-slate-700/50 rounded-xl transition-all duration-300;
-  }
-  html.light .glass-panel {
-    @apply bg-white/50 border-slate-200/50;
+    @apply rounded-[20px] transition-all duration-300;
+    background-color: var(--color-theme-card);
+    backdrop-filter: blur(18px);
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--color-theme-border);
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15);
   }
   
   .gradient-text {
