@@ -97,7 +97,7 @@ const Home = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl text-slate-400 mb-10 leading-relaxed"
+              className="text-xl text-theme-muted mb-10 leading-relaxed"
             >
               HashSphere is an interactive educational Web3 platform that helps beginners learn Blockchain fundamentals through beautiful visualizations, real-time cryptocurrency prices, and an interactive blockchain simulator.
             </motion.p>
@@ -109,12 +109,12 @@ const Home = () => {
               className="flex flex-col sm:flex-row items-center justify-center gap-4"
             >
               <Link to="/simulator" className="relative group w-full sm:w-auto">
-                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-xl blur opacity-30 group-hover:opacity-100 transition duration-300 animate-pulse-glow"></div>
-                <div className="relative w-full px-8 py-4 bg-slate-900 rounded-xl text-white font-bold hover:bg-slate-800 transition-all flex items-center justify-center gap-2 border border-slate-700">
+                <div className="absolute -inset-1 bg-gradient-to-r from-soft-blue to-purple-primary rounded-xl blur opacity-30 group-hover:opacity-100 transition duration-300 animate-pulse-glow"></div>
+                <div className="relative w-full px-8 py-4 bg-theme-surface rounded-xl text-theme-text font-bold hover:bg-theme-card transition-all flex items-center justify-center gap-2 border border-theme-border">
                   Start Learning <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </div>
               </Link>
-              <Link to="/concepts" className="w-full sm:w-auto px-8 py-4 rounded-xl glass-panel text-white font-bold hover:bg-slate-800/80 transition-all border border-slate-700/50 hover:border-cyan-500/50">
+              <Link to="/concepts" className="w-full sm:w-auto px-8 py-4 rounded-xl glass-panel text-soft-blue font-bold hover:bg-theme-card/80 transition-all border border-purple-primary/50 hover:border-purple-primary">
                 Explore Concepts
               </Link>
             </motion.div>
@@ -130,12 +130,12 @@ const Home = () => {
             <div className="relative z-10 grid md:grid-cols-2 gap-12 items-center">
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold mb-6">What is <span className="gradient-text">Web3?</span></h2>
-                <div className="space-y-4 text-slate-400">
+                <div className="space-y-4 text-theme-muted">
                   <p>
-                    <strong className="text-white">Blockchain</strong> is a distributed, immutable ledger that facilitates the process of recording transactions and tracking assets across a network of computers.
+                    <strong className="text-theme-text">Blockchain</strong> is a distributed, immutable ledger that facilitates the process of recording transactions and tracking assets across a network of computers.
                   </p>
                   <p>
-                    <strong className="text-white">Web3</strong> is the next evolution of the internet, built on decentralized networks like blockchains. It shifts power away from centralized entities back to the users.
+                    <strong className="text-theme-text">Web3</strong> is the next evolution of the internet, built on decentralized networks like blockchains. It shifts power away from centralized entities back to the users.
                   </p>
                   <p>
                     Decentralization matters because it removes single points of failure, prevents censorship, and enables trustless interactions where code, rather than corporations, enforces rules.
@@ -173,7 +173,7 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Platform Features</h2>
-            <p className="text-slate-400 max-w-2xl mx-auto">Everything you need to kickstart your journey into the world of decentralized technologies.</p>
+            <p className="text-theme-muted max-w-2xl mx-auto">Everything you need to kickstart your journey into the world of decentralized technologies.</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature, index) => (
@@ -210,30 +210,30 @@ const Home = () => {
                   <benefit.icon className="w-10 h-10" />
                 </div>
                 <h4 className="text-xl font-bold mb-2">{benefit.title}</h4>
-                <p className="text-slate-400 text-sm">{benefit.desc}</p>
+                <p className="text-theme-muted text-sm">{benefit.desc}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
       {/* Stats Section */}
-      <section className="py-12 border-y border-slate-800 bg-slate-900/30">
+      <section className="py-12 border-y border-slate-800 bg-theme-surface/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="p-4">
               <Activity className="w-8 h-8 text-cyan-400 mx-auto mb-3" />
-              <div className="text-4xl font-bold text-white mb-1"><AnimatedCounter value={25.4} decimal={1} suffix="M+" /></div>
-              <div className="text-sm text-slate-400">Daily Transactions</div>
+              <div className="text-4xl font-bold text-theme-text mb-1"><AnimatedCounter value={25.4} decimal={1} suffix="M+" /></div>
+              <div className="text-sm text-theme-muted">Daily Transactions</div>
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="p-4">
               <Blocks className="w-8 h-8 text-purple-400 mx-auto mb-3" />
-              <div className="text-4xl font-bold text-white mb-1"><AnimatedCounter value={892} suffix="K+" /></div>
-              <div className="text-sm text-slate-400">Blocks Mined</div>
+              <div className="text-4xl font-bold text-theme-text mb-1"><AnimatedCounter value={892} suffix="K+" /></div>
+              <div className="text-sm text-theme-muted">Blocks Mined</div>
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="p-4">
               <Network className="w-8 h-8 text-blue-400 mx-auto mb-3" />
-              <div className="text-4xl font-bold text-white mb-1"><AnimatedCounter value={120} suffix="+" /></div>
-              <div className="text-sm text-slate-400">Networks Supported</div>
+              <div className="text-4xl font-bold text-theme-text mb-1"><AnimatedCounter value={120} suffix="+" /></div>
+              <div className="text-sm text-theme-muted">Networks Supported</div>
             </motion.div>
           </div>
         </div>

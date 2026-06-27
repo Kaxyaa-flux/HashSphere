@@ -110,7 +110,7 @@ const LivePrices = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.1 }}
-              className="text-slate-400 text-lg"
+              className="text-theme-muted text-lg"
             >
               Real-time cryptocurrency prices powered by CoinGecko.
             </motion.p>
@@ -131,14 +131,14 @@ const LivePrices = () => {
                 placeholder="Search coin..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full bg-slate-800/50 border border-slate-700/50 rounded-xl py-2 pl-10 pr-4 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500/50 transition-all"
+                className="w-full bg-theme-card/50 border border-slate-700/50 rounded-xl py-2 pl-10 pr-4 text-theme-text focus:outline-none focus:ring-2 focus:ring-cyan-500/50 transition-all"
               />
             </div>
             
             <button 
               onClick={handleRefresh}
               disabled={refreshing || loading}
-              className="flex items-center justify-center gap-2 px-4 py-2 glass-panel hover:bg-slate-800/80 transition-all rounded-xl w-full sm:w-auto"
+              className="flex items-center justify-center gap-2 px-4 py-2 glass-panel hover:bg-theme-card/80 transition-all rounded-xl w-full sm:w-auto"
             >
               <RefreshCw className={`w-4 h-4 ${refreshing ? 'animate-spin' : ''}`} />
               <span className="hidden sm:inline">Refresh</span>
@@ -151,7 +151,7 @@ const LivePrices = () => {
             <AlertCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
             <div>
               <h4 className="text-red-400 font-medium">Error loading data</h4>
-              <p className="text-sm text-slate-400">{error}</p>
+              <p className="text-sm text-theme-muted">{error}</p>
             </div>
           </div>
         )}

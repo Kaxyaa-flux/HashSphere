@@ -98,7 +98,7 @@ const Concepts = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="text-slate-400 max-w-2xl mx-auto text-lg"
+            className="text-theme-muted max-w-2xl mx-auto text-lg"
           >
             Master the fundamentals of blockchain technology through simple, clear comparisons.
           </motion.p>
