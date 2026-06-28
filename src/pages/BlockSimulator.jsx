@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Block from '../components/Block';
 import { calculateHash } from '../utils/blockchain';
 import { motion } from 'framer-motion';
-import { Link2, AlertTriangle, Info } from 'lucide-react';
-
+import { Link2, AlertTriangle, Info, Plus } from 'lucide-react';
 const BlockSimulator = () => {
   const [blocks, setBlocks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [difficulty, setDifficulty] = useState('00');
+  const endOfChainRef = useRef(null);
 
   // Initialize the genesis block and a second block
   useEffect(() => {
@@ -80,6 +80,30 @@ const BlockSimulator = () => {
     }
     
     setBlocks(newBlocks);
+  };
+
+  const handleAddBlock = async () => {
+    const previousBlock = blocks[blocks.length - 1];
+    const newIndex = previousBlock.index + 1;
+    const timestamp = Date.now();
+    const initialTx = JSON.stringify({ sender: '', receiver: '', amount: '', currency: 'ETH', message: '' });
+    
+    const hash = await calculateHash(newIndex, previousBlock.hash, timestamp, initialTx, 0);
+
+    const newBlock = {
+      index: newIndex,
+      timestamp,
+      data: initialTx,
+      previousHash: previousBlock.hash,
+      hash,
+      nonce: 0
+    };
+
+    setBlocks([...blocks, newBlock]);
+    
+    setTimeout(() => {
+      endOfChainRef.current?.scrollIntoView({ behavior: 'smooth', inline: 'end', block: 'nearest' });
+    }, 100);
   };
 
   // Check if chain is valid at a specific index
@@ -167,6 +191,23 @@ const BlockSimulator = () => {
               )}
             </React.Fragment>
           ))}
+          
+          {!isLoading && (
+            <div 
+              ref={endOfChainRef}
+              className="flex items-center justify-center shrink-0 w-full lg:w-auto mt-4 lg:mt-0"
+            >
+              <button 
+                onClick={handleAddBlock}
+                className="glass-card p-6 border-2 border-dashed border-theme-border hover:border-soft-blue/50 flex flex-col items-center justify-center gap-3 h-full min-h-[400px] w-full lg:w-[200px] text-theme-muted hover:text-soft-blue transition-all group"
+              >
+                <div className="bg-theme-surface/50 p-4 rounded-full group-hover:scale-110 transition-transform">
+                  <Plus className="w-8 h-8" />
+                </div>
+                <span className="font-bold">Add New Block</span>
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Educational Explanations Section */}
