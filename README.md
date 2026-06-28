@@ -1,94 +1,201 @@
-# HashSphere
+<div align="center">
+  <img src="https://img.shields.io/badge/Status-Completed-success?style=for-the-badge" alt="Status Badge"/>
+  
+  <br />
+  
+  <h1>🌌 HashSphere</h1>
+  
+  <p><strong>Explore the World of Blockchain, One Hash at a Time.</strong></p>
 
-> Explore the World of Blockchain, One Hash at a Time.
+  <p>
+    <a href="#-about">About</a> •
+    <a href="#-features">Features</a> •
+    <a href="#-tech-stack">Tech Stack</a> •
+    <a href="#-folder-structure">Structure</a> •
+    <a href="#-installation">Installation</a>
+  </p>
+</div>
 
-HashSphere is an interactive educational Web3 platform designed to help beginners learn Blockchain fundamentals through beautiful visualizations, real-time cryptocurrency prices, and an interactive blockchain simulator. It is built completely on the frontend.
+---
 
-## 🚀 Features
+## 📖 About
 
-- **Educational Hub:** Simple, beginner-friendly explanations of core Web3 concepts (Web2 vs Web3, Public vs Private Keys, etc.).
-- **Live Crypto Dashboard:** Real-time price tracking for top cryptocurrencies, powered by the CoinGecko API.
-- **Block Mining Simulator:** Hands-on interactive simulator to understand Proof of Work, hashing (SHA-256), nonces, and chain immutability.
-- **Premium UI:** Futuristic design featuring dark theme, glassmorphism, gradient text, and smooth Framer Motion animations.
+**HashSphere** is an interactive, educational Web3 platform designed to demystify Blockchain fundamentals for absolute beginners. Built as part of the **Arbitrum Builder Pods assignment**, HashSphere bridges the gap between complex cryptographic theory and accessible interactive learning. 
 
-## 💻 Tech Stack
+The platform offers a hands-on experience through a real-time cryptocurrency dashboard tracking market movements and a comprehensive, browser-based blockchain simulator where users can hash data, mine blocks using Proof of Work, and visualize chain validation in real-time.
 
-- **Framework:** React + Vite
-- **Routing:** React Router DOM
-- **Styling:** Tailwind CSS (Custom configurations for Glassmorphism & Gradients)
-- **Icons:** Lucide React
-- **Animations:** Framer Motion
-- **API Integration:** Fetching live data from [CoinGecko Public API](https://www.coingecko.com/en/api)
-- **Cryptography:** Native Web Crypto API (SHA-256)
+---
 
-## 📁 Folder Structure
+## ✨ Features
+
+| Feature | Status |
+| :--- | :---: |
+| **Responsive Web3 Landing Page** | ✅ |
+| **Interactive Concept Cards** | ✅ |
+| **Live Crypto Dashboard** | ✅ |
+| **CoinGecko API Integration** | ✅ |
+| **Interactive Mining Simulator** | ✅ |
+| **SHA-256 Cryptographic Hashing** | ✅ |
+| **Proof of Work Simulation** | ✅ |
+| **Real-time Chain Validation** | ✅ |
+| **Glassmorphism UI Design** | ✅ |
+| **Theme Toggle (Light/Dark)** | ✅ |
+| **Framer Motion Animations** | ✅ |
+
+---
+
+## 🛠 Tech Stack
+
+| Layer | Technology |
+| :--- | :--- |
+| **Frontend** | React 19, Vite 8 |
+| **Backend** | Node.js, Express.js |
+| **Language** | JavaScript (ES6+) |
+| **Styling** | Tailwind CSS v4 |
+| **UI Components** | Custom Glassmorphism |
+| **Routing** | React Router DOM |
+| **State Management** | React Hooks (`useState`, `useEffect`) |
+| **API** | CoinGecko REST API |
+| **HTTP Client** | Axios (Backend) / Fetch (Frontend) |
+| **Animations** | Framer Motion |
+| **Icons** | Lucide React |
+| **Hashing Logic** | Web Crypto API / Custom SHA-256 (`blockchain.js`) |
+| **Notifications** | React Hot Toast |
+| **Package Manager** | npm |
+| **Version Control** | Git |
+
+---
+
+## 📦 Dependencies
+
+| Package | Purpose |
+| :--- | :--- |
+| `react` / `react-dom` | Core UI Library |
+| `vite` | Next-generation Build Tool |
+| `tailwindcss` | Utility-first CSS framework |
+| `framer-motion` | Declarative UI animations & micro-interactions |
+| `lucide-react` | Beautiful, consistent iconography |
+| `react-router-dom` | Client-side routing |
+| `express` | Lightweight backend server framework |
+| `axios` | Promise-based HTTP client (server proxying) |
+| `cors` | Cross-Origin Resource Sharing middleware |
+
+---
+
+## 📂 Folder Structure
 
 ```text
-src/
-│
-├── components/
-│   ├── Block.jsx             # Individual block component for simulator
-│   ├── ComparisonCard.jsx    # UI card for educational comparisons
-│   ├── CryptoCard.jsx        # UI card for live prices
-│   ├── FeatureCard.jsx       # Feature showcase on homepage
-│   ├── Footer.jsx            # Global footer
-│   ├── Loader.jsx            # Loading spinner
-│   └── Navbar.jsx            # Global navigation bar
-│
-├── pages/
-│   ├── Home.jsx              # Landing page
-│   ├── Concepts.jsx          # Educational comparisons page
-│   ├── LivePrices.jsx        # Crypto prices dashboard
-│   └── BlockSimulator.jsx    # Interactive mining simulator
-│
-├── services/
-│   └── api.js                # CoinGecko API integration
-│
-├── utils/
-│   └── blockchain.js         # Pure JS SHA-256 hashing logic
-│
-├── App.jsx                   # Main layout and routing
-├── index.css                 # Tailwind and custom utility classes
-└── main.jsx                  # React application entry point
+HashSphere/
+├── public/                 # Static public assets
+├── server/                 # Express backend directory
+│   ├── package.json        # Backend dependencies
+│   └── server.js           # API proxies and server configuration
+├── src/                    # Frontend React source code
+│   ├── assets/             # Images and local media
+│   ├── components/         # Reusable UI components (Footer, FeatureCard, etc.)
+│   ├── pages/              # Application routes (Home, Concepts, Simulator, etc.)
+│   ├── services/           # External API integration services
+│   ├── utils/              # Helper functions (blockchain.js)
+│   ├── App.jsx             # Main application container & router
+│   ├── index.css           # Global Tailwind CSS and design tokens
+│   └── main.jsx            # React application entry point
+├── package.json            # Frontend workspace configuration
+├── tailwind.config.js      # Tailwind configuration and theme extensions
+└── vite.config.js          # Vite build configuration
 ```
 
-## 🛠️ Installation Steps
+---
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/Kaxyaa-flux/HashSphere.git
-   cd HashSphere
-   ```
+## 🌐 Website Pages
 
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
+| Page | Description |
+| :--- | :--- |
+| **Home** | Premium landing page featuring an animated Web3 illustration, learning timeline, interactive statistics, and a "Why Choose Us" section. |
+| **Concepts** | Educational modules breaking down core Web3 fundamentals like distributed ledgers, smart contracts, and Ethereum. |
+| **Live Prices** | A real-time dashboard fetching live cryptocurrency market data (Bitcoin, Ethereum, etc.) with robust fallback handling. |
+| **Block Simulator** | An interactive sandbox where users input data, calculate SHA-256 hashes, and simulate mining a blockchain block. |
 
-3. **Start the development server:**
-   ```bash
-   npm run dev
-   ```
+---
 
-4. Open your browser and visit `http://localhost:5173`.
+## 🎨 Design System
 
-## 🌐 API Used
+- **Theme**: High-contrast, premium Web3 aesthetic.
+- **Color Palette**: 
+  - Primary: `Emerald` (`#10B981`) & `Cyan` (`#34D399`)
+  - Accent: `Gold` (`#D4AF37`)
+  - Background: Deep Dark `Theme-BG` (`#0B0F0C`)
+- **UI Style**: Glassmorphism (translucent backgrounds, soft borders, heavy backdrop blurs).
+- **Animations**: Extensive use of `framer-motion` for scroll fade-ins, hover lifts, button ripples, and continuous background particle/orbit effects.
+- **Typography**: Inter (Body), Space Grotesk (Headings), Fira Code (Data/Hashes).
 
-- **CoinGecko API v3**: Used to fetch simple price data and 24-hour change percentages for various cryptocurrencies.
-  - Endpoint: `https://api.coingecko.com/api/v3/simple/price`
+---
 
-## 🔮 Future Improvements
+## 🌍 APIs Used
 
-- Add Wallet Connection functionality (e.g., MetaMask).
-- Implement a simulated transaction pool to visualize mempool mechanics.
-- Add historical price charts (e.g., Chart.js or Recharts).
+- **CoinGecko API**: Used within the `Live Prices` dashboard and backed by the Express server to fetch real-time cryptocurrency prices, market caps, and 24h percentage changes. Fallback mock data is intelligently utilized to prevent rate-limiting disruptions.
 
-## ⚠️ Known Issues
+---
 
-- The CoinGecko Public API does not require an API key but has strict rate limits. If you refresh too often, the Live Prices page may temporarily display an error until the rate limit resets.
+## ⚙ Installation
 
-## 🧑‍💻 Developer Information
+Follow these steps to run HashSphere locally on your machine.
 
-- **Developer:** KANAK / Developer Name
-- **Batch:** Web3 Innovators
-- **GitHub:** [Kaxyaa-flux](https://github.com/Kaxyaa-flux)
+**1. Clone the repository:**
+```bash
+git clone https://github.com/Kaxyaa-flux/HashSphere.git
+cd HashSphere
+```
+
+**2. Install Frontend Dependencies & Start Client:**
+```bash
+npm install
+npm run dev
+```
+
+**3. Install Backend Dependencies & Start Server (Optional):**
+```bash
+cd server
+npm install
+npm run dev
+```
+
+---
+
+## 📸 Screenshots
+
+> *Replace the placeholder URLs below with actual screenshots of your running application.*
+
+| Home Page | Block Simulator |
+| :---: | :---: |
+| ![Home Placeholder](https://via.placeholder.com/600x350?text=Home+Page+Screenshot) | ![Simulator Placeholder](https://via.placeholder.com/600x350?text=Simulator+Screenshot) |
+| **Live Crypto Prices** | **Concepts Layout** |
+| ![Live Prices Placeholder](https://via.placeholder.com/600x350?text=Live+Prices+Screenshot) | ![Concepts Placeholder](https://via.placeholder.com/600x350?text=Concepts+Screenshot) |
+
+---
+
+## 🚀 Future Improvements
+
+- **Wallet Integration**: Implement `ethers.js` or `viem` to allow users to connect MetaMask and explore real transaction signing.
+- **Blockchain Explorer**: Expand the simulator into a multi-block, distributed visualization where multiple nodes attempt to validate chains.
+- **Historical Charts**: Add interactive charting capabilities to the Live Prices dashboard using Recharts or Chart.js.
+
+---
+
+## 👨‍💻 Developer
+
+**Kanak Bharara**  
+🔗 [GitHub Profile](https://github.com/Kaxyaa-flux)
+
+---
+
+## 🙏 Acknowledgements
+
+- **Arbitrum Builder Pods** - For the inspiration and assignment structure.
+- **CoinGecko API** - For providing reliable crypto market data.
+- **Open Source Community** - Huge thanks to the maintainers of React, Vite, Tailwind CSS, and Framer Motion.
+
+---
+
+## 📄 License
+
+This is an **Educational Project** created for learning and demonstration purposes.
