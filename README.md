@@ -161,17 +161,6 @@ npm run dev
 
 ---
 
-## 📸 Screenshots
-
-> *Replace the placeholder URLs below with actual screenshots of your running application.*
-
-| Home Page | Block Simulator |
-| :---: | :---: |
-| ![Home Placeholder](https://via.placeholder.com/600x350?text=Home+Page+Screenshot) | ![Simulator Placeholder](https://via.placeholder.com/600x350?text=Simulator+Screenshot) |
-| **Live Crypto Prices** | **Concepts Layout** |
-| ![Live Prices Placeholder](https://via.placeholder.com/600x350?text=Live+Prices+Screenshot) | ![Concepts Placeholder](https://via.placeholder.com/600x350?text=Concepts+Screenshot) |
-
----
 
 ## 🚀 Future Improvements
 
