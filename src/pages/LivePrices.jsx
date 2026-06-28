@@ -66,8 +66,26 @@ const LivePrices = () => {
       setLastUpdated(new Date());
       if (isRefresh) toast.success('Prices updated successfully');
     } catch (err) {
-      setError('Failed to fetch live prices. The API might be rate limited.');
-      if (isRefresh) toast.error('Failed to update prices');
+      console.warn('API Failed, using fallback mock data:', err);
+      const mockData = {
+        'bitcoin': { usd: 68420.50 + (Math.random() * 100 - 50), usd_24h_change: 2.5 + (Math.random() * 2 - 1) },
+        'ethereum': { usd: 3840.20 + (Math.random() * 20 - 10), usd_24h_change: -1.2 + (Math.random() * 2 - 1) },
+        'solana': { usd: 154.30 + (Math.random() * 2 - 1), usd_24h_change: 5.8 + (Math.random() * 2 - 1) },
+        'arbitrum': { usd: 1.18 + (Math.random() * 0.02 - 0.01), usd_24h_change: 0.4 + (Math.random() * 2 - 1) },
+        'matic-network': { usd: 0.73 + (Math.random() * 0.02 - 0.01), usd_24h_change: -0.6 + (Math.random() * 2 - 1) }
+      };
+      
+      const formattedData = Object.entries(mockData).map(([id, values]) => ({
+        id,
+        name: coinMap[id] || id,
+        ...values
+      }));
+      formattedData.sort((a, b) => b.usd - a.usd);
+      
+      setPrices(formattedData);
+      setLastUpdated(new Date());
+      setError('Live API rate limited. Currently showing simulated market data.');
+      if (isRefresh) toast.success('Simulated prices updated');
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -147,10 +165,10 @@ const LivePrices = () => {
         </div>
 
         {error && !loading && (
-          <div className="glass-panel border-red-500/30 bg-red-500/5 p-4 mb-8 flex items-start gap-3">
-            <AlertCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
+          <div className="glass-panel border-orange-500/30 bg-orange-500/5 p-4 mb-8 flex items-start gap-3">
+            <AlertCircle className="w-5 h-5 text-orange-400 shrink-0 mt-0.5" />
             <div>
-              <h4 className="text-red-400 font-medium">Error loading data</h4>
+              <h4 className="text-orange-400 font-medium">Using Simulated Data</h4>
               <p className="text-sm text-theme-muted">{error}</p>
             </div>
           </div>
