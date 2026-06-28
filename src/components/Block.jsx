@@ -17,6 +17,7 @@ const Block = ({ block, index, updateBlock, isChainValid, difficulty = '00' }) =
   // Shake animation for invalid block
   const shakeAnimation = {
     x: [0, -10, 10, -10, 10, -5, 5, 0],
+    opacity: 1,
     transition: { duration: 0.5 }
   };
 
